@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>aj-rpc</artifactId>
+        <groupId>com.aj</groupId>
+        <version>${aj-rpc.version}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>aj-rpc-example</artifactId>
+    <version>${aj-rpc.version}</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>./aj-rpc-example-api</module>
+        <module>./aj-rpc-example-server</module>
+        <module>./aj-rpc-example-client</module>
+    </modules>
+
+
+</project>
