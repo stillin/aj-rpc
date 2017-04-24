@@ -1,6 +1,7 @@
 package com.aj.common;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by chaiaj on 2017/4/2.
@@ -69,5 +70,18 @@ public class RpcRequest implements Serializable {
 
     public void setTimeout(int timeout) {
         this.timeout = timeout;
+    }
+
+    @Override
+    public String toString() {
+        return "RpcRequest{" +
+                "requestId='" + requestId + '\'' +
+                ", className='" + className + '\'' +
+                ", methodName='" + methodName + '\'' +
+                ", parameterTypes=" + Arrays.toString(parameterTypes) +
+                ", parameters=" + Arrays.toString(parameters) +
+                ", createTime=" + createTime +
+                ", timeout=" + timeout +
+                '}';
     }
 }

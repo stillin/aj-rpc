@@ -16,12 +16,14 @@ public class ResponseFuture implements Future {
 
     private static final Map<String, ResponseFuture> FUTURES = new ConcurrentHashMap<String, ResponseFuture>();
     private Channel channel;
+    private RpcRequest request;
     private volatile RpcResponse response;
     private Object lock = new Object();
     private long createTime;
     private int timeout;
 
     public ResponseFuture(RpcRequest request, Channel channel, int timeout) {
+        this.request = request;
         this.channel = channel;
         createTime = System.currentTimeMillis();
         this.timeout = timeout;
@@ -73,13 +75,13 @@ public class ResponseFuture implements Future {
                         try {
                             lock.wait(waitTime);
                         } catch (InterruptedException e) {
-                            throw new RpcException("ResponseFuture get response failed, request:" + response.getRequestId()
+                            throw new RpcException("ResponseFuture get response failed, request:" + request
                                     + ", cost:" + (System.currentTimeMillis() - createTime));
                         }
 
                         if (!isDone()) {
                             throw new RpcException("ResponseFuture get response timeout, request:"
-                                    + response.getRequestId());
+                                    + request);
                         }
                         return response;
                     }
@@ -87,7 +89,7 @@ public class ResponseFuture implements Future {
 
                 if (!isDone()) {
                     throw new RpcException("ResponseFuture get response timeout, request:"
-                            + response.getRequestId());
+                            + request);
                 }
             }
         }
